@@ -425,6 +425,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\MyMessages.cshtml" />
+    <Content Include="Views\Home\Moderation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

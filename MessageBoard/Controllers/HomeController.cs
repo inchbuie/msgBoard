@@ -56,7 +56,14 @@ namespace MessageBoard.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult MyMessages()
+        {
+            return View();
+        }
+
+        [Authorize(Users="admin")]
+        public ActionResult Moderation()
         {
             return View();
         }
