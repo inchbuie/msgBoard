@@ -13,6 +13,13 @@ namespace MessageBoard
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //example for custom route
+            routes.MapRoute(
+                name: "MyMessages",
+                url: "MyMessages",
+                defaults: new { controller = "Home", action = "MyMessages" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

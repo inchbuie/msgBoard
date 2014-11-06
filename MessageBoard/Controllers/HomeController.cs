@@ -55,5 +55,10 @@ namespace MessageBoard.Controllers
 
             return View();
         }
+
+        public ActionResult MyMessages()
+        {
+            return View();
+        }
     }
 }

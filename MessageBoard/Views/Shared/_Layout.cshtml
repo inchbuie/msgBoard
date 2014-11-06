@@ -90,7 +90,11 @@
                                 <div id="ddtopmenubar" class="mattblackmenu">
                                     <!-- Main navigation -->
                                     <ul>
-                                        <!-- Add rel="ddsubmenu{count}" to main menu -->
+                                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                                        <li>@Html.ActionLink("My Messages", "MyMessages", "Home")</li>
+                                        @*<!-- Add rel="ddsubmenu{count}" to main menu -->
                                         <li><a href="index.html" rel="ddsubmenu1">Home</a>
                                             <!-- Sub navigation, A -->
                                             <!-- Add id "ddsubmenu{count} and class "ddsubmenustyle" -->
@@ -123,7 +127,7 @@
                                                     </ul>
                                                 </li>
                                             </ul>
-                                        </li>
+                                        </li>*@
                                     </ul>
                                 </div>
                             </div>
