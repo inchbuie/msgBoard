@@ -1,0 +1,11 @@
+/*@mainColor: #888;
+
+.foo
+{
+    width: 100px;
+    color-rendering: @mainColor;
+}
+
+.bar{
+    background: @mainColor;
+}*/
