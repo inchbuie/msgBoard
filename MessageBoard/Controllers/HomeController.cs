@@ -12,10 +12,6 @@ namespace MessageBoard.Controllers
     {
         private IMailService _mailSvc;
 
-        public HomeController()
-        {
-            _mailSvc = new MailService();
-        }
         public HomeController(IMailService mailSvc)
         {
             _mailSvc = mailSvc;
