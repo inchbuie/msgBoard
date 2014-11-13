@@ -9,3 +9,39 @@
 .bar{
     background: @mainColor;
 }*/
+
+@baseMessageColor: #AAA;
+
+.message
+{
+    background: none repeat scroll 0 0 lighten(@baseMessageColor, 25%);
+    border: 1px solid @baseMessageColor;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin-bottom: 5px;
+    margin-left: 0;
+    margin-right: -20px;
+    padding: 5px;
+
+    .title
+    {
+        font-size: 20px;
+        font-weight: bold;
+        text-shadow: 2px 4px 4px @baseMessageColor;
+    }
+
+    .reply
+    {
+        border-top: 1px solid @baseMessageColor;
+        margin-top: 5px;
+        margin-left: 15px;
+
+        .created
+        {
+            font-size: 8px;
+            margin-left: 10px;
+            text-shadow: 2px 2px 2px @baseMessageColor;
+        }
+    }
+}
