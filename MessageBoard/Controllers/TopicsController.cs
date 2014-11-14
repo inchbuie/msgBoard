@@ -19,13 +19,18 @@ namespace MessageBoard.Controllers
             _repo = repo;
         }
 
-        public IEnumerable<Topic> Get()
+        public IEnumerable<Topic> Get(bool includeReplies = false)
         {
-            var topcs = _repo.GetTopicsIncludingReplies()
-                .OrderByDescending(t => t.Created)
-                .Take(50)
-                .ToList();
-            return topcs;
+            var initialResults = (includeReplies) 
+                ? _repo.GetTopicsIncludingReplies() 
+                : _repo.GetTopics();
+
+            var topics = initialResults
+                   .OrderByDescending(t => t.Created)
+                   .Take(50)
+                   .ToList();
+
+            return topics;
         }
 
         // Content-Type of client request must be application/json!
