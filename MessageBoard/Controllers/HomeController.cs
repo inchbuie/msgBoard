@@ -5,23 +5,31 @@ using System.Web;
 using System.Web.Mvc;
 using MessageBoard.Models;
 using MessageBoard.Services;
+using MessageBoard.Data;
 
 namespace MessageBoard.Controllers
 {
     public class HomeController : Controller
     {
         private IMailService _mailSvc;
+        private IMessageBoardRepository _repo;
 
-        public HomeController(IMailService mailSvc)
+        public HomeController(IMailService mailSvc, IMessageBoardRepository repo)
         {
             _mailSvc = mailSvc;
+            _repo = repo;
         }
 
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
-            return View();
+            var topcs = _repo.GetTopics()
+                .OrderByDescending(t => t.Created)
+                .Take(25)
+                .ToList();
+
+            return View(topcs);
         }
 
         public ActionResult About()

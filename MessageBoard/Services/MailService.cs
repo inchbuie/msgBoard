@@ -16,7 +16,7 @@ namespace MessageBoard.Services
                 var client = new SmtpClient();
                 client.Send(msg);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //TODO add logging
                 return false;

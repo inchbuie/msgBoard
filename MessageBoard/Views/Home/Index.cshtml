@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<MessageBoard.Data.Topic>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -116,3 +117,9 @@
         </div>
     </div>
 </div>
+
+@foreach(var topic in Model)
+{
+    <div>@topic.Title</div>
+    <div>--@topic.Body</div>
+}
