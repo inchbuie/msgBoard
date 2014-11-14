@@ -8,6 +8,14 @@ namespace MessageBoard.Data
     public interface IMessageBoardRepository
     {
         IQueryable<Topic> GetTopics();
+        IQueryable<Topic> GetTopicsIncludingReplies();
         IQueryable<Reply> GetRepliesByTopic(int topicId);
+
+        bool Save();
+        bool AddTopic(Topic newTopic);
+        //UpdateTopic()
+        //DeleteTopic()
+
+        bool AddReply(Reply newReply);
     }
 }

@@ -12,6 +12,8 @@ namespace MessageBoard.App_Start
     using Ninject.Web.Common;
     using MessageBoard.Services;
     using MessageBoard.Data;
+    using System.Web.Http;
+    using WebApiContrib.IoC.Ninject;
 
     public static class NinjectWebCommon 
     {
@@ -48,6 +50,10 @@ namespace MessageBoard.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+                
+                //using WebApiContrib.IoC.Ninject - use Ninject to resolve dependencies for Api Controllers
+                GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
+
                 return kernel;
             }
             catch
@@ -70,6 +76,8 @@ namespace MessageBoard.App_Start
 #endif
             kernel.Bind<MessageBoardContext>().To<MessageBoardContext>().InRequestScope();
             kernel.Bind<IMessageBoardRepository>().To<MessageBoardRepository>().InRequestScope();
+
+
         }        
     }
 }
