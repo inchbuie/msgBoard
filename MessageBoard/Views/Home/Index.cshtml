@@ -23,15 +23,15 @@
     <div class="messages">
         @* dynamically build with angular with server data*@
         <div class="message row" data-ng-repeat="msg in data">
-            <div class="title span10">{{msg.title}}</div>
-            <div class="date span2">{{msg.created}}</div>
-            <div class="contents span12">{{msg.body}}</div>
+            <div class="title span10">{{ msg.title }}</div>
+            <div class="date span2">{{ msg.created | date:"medium" }}</div>
+            <div class="contents span12">{{ msg.body }}</div>
             <div class="toolbar span12">
                 <button class="btn btn-primary reply-button">Reply</button>
             </div>
             <div class="replies span12">
                 <div class="reply" data-ng-repeat="reply in msg.replies">
-                    <div class="created pull-right">{{ reply.created }}</div>
+                    <div class="created pull-right">{{ reply.created | date:"medium" }}</div>
                     <div class="content">{{ reply.body }}</div>
                 </div>
             </div>
