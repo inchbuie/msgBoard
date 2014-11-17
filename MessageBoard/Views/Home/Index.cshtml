@@ -11,10 +11,17 @@
     <div class="message-header">
         <h1>Message Board</h1>
         <p class="lead">Latest Messages...</p>
-        <div>Message Count: {{ dataCount }}</div>
+        @* getting data from angular! *@
+        <div>Message Count: {{ data.length }}</div>
+    </div>
+
+    @*bootstrap progress bar*@
+    <div class="progress progress-striped active" data-ng-show="isBusy">
+        <div class="bar" style="width: 100%;"></div>
     </div>
 
     <div class="messages">
+        @* dynamically build with angular with server data*@
         <div class="message row" data-ng-repeat="msg in data">
             <div class="title span10">{{msg.title}}</div>
             <div class="date span2">{{msg.created}}</div>
@@ -23,29 +30,9 @@
                 <button class="btn btn-primary reply-button">Reply</button>
             </div>
             <div class="replies span12">
-                <div class="reply">
-                    <div class="created pull-right">
-                        Nov. 13, 2014
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipsiscing elit
-                    </div>
-                </div>
-                <div class="reply">
-                    <div class="created pull-right">
-                        Nov. 13, 2014
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipsiscing elit
-                    </div>
-                </div>
-                <div class="reply">
-                    <div class="created pull-right">
-                        Nov. 13, 2014
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipsiscing elit
-                    </div>
+                <div class="reply" data-ng-repeat="reply in msg.replies">
+                    <div class="created pull-right">{{ reply.created }}</div>
+                    <div class="content">{{ reply.body }}</div>
                 </div>
             </div>
         </div>
