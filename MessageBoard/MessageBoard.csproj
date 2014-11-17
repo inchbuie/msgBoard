@@ -396,6 +396,7 @@
     <Content Include="Scripts\easing.js" />
     <Content Include="Scripts\flexslider.js" />
     <Content Include="Scripts\gmap.js" />
+    <Content Include="Scripts\home-index.js" />
     <Content Include="Scripts\html5shim.js" />
     <Content Include="Scripts\custom.min.js.map">
       <DependentUpon>custom.js</DependentUpon>
