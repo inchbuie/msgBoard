@@ -25,6 +25,12 @@ module.factory("dataService",
     function ($http, $q) { //callback for service
         //local members
         var _topics = [];
+        var _isInitialized = false;
+
+        var _dataLoaded = function () {
+            return _isInitialized;
+        }
+
         var _getTopics = function () {
 
             //create deferral object to expose promise (using Angular's magic $q, which was injected)
@@ -35,6 +41,8 @@ module.factory("dataService",
                    function (result) {
                        //succesful
                        angular.copy(result.data, _topics);
+                       // signal that data has been initialized
+                       _isInitialized = true;
                        deferred.resolve();
                    },
                    function () {
@@ -46,10 +54,33 @@ module.factory("dataService",
             return deferred.promise;
         };
 
+        
+        var _addTopic = function (newTopic) {
+            var deferred = $q.defer();
+
+            $http.post("/api/v1/topics", newTopic)
+                .then(
+                    function (result) {
+                        //succesful
+                        var savedTopic = result.data;
+                        // merge with existing list of topics
+                        _topics.splice(0, 0, savedTopic);
+                        deferred.resolve(savedTopic);
+                    },
+                    function () {
+                        //error
+                        deferred.reject();
+                    });
+
+            return deferred.promise;
+        };
+
         // must return object representing the service, exposing private members
         return {
             topics: _topics,
-            getTopics: _getTopics
+            getTopics: _getTopics,
+            addTopic: _addTopic,
+            dataLoaded: _dataLoaded
         };
     });
 
@@ -57,21 +88,25 @@ function topicsController($scope, $http, dataService) {
     console.log("inside the topics controller");
 
     $scope.dataSvc = dataService;
-    $scope.isBusy = true;
+    $scope.isBusy = false;
 
-    dataService.getTopics()
-        .then(
-            function (result) {
-                //succesful
-            },
-            function () {
-                //error
-                console.log("error loading topics");
-            })
-            .then(function () {
-                // after either error or success
-                $scope.isBusy = false;
-        });
+    //only call data service if this is the 1st time & data not already loaded
+    if (dataService.dataLoaded() == false) {
+        $scope.isBusy = true;
+        dataService.getTopics()
+            .then(
+                function (result) {
+                    //succesful
+                },
+                function () {
+                    //error
+                    console.log("error loading topics");
+                })
+                .then(function () {
+                    // after either error or success
+                    $scope.isBusy = false;
+                });
+    }
 }
 
 
@@ -81,15 +116,10 @@ function newTopicController($scope, $http, $window) {
     $scope.save = function () {
         //console.log("save() called for " + $scope.newTopic.title);
 
-        $http.post("/api/v1/topics", $scope.newTopic)
-            .then(
+        dataService.addTopics($scope.newTopic)
+         .then(
                 function (result) {
                     //succesful
-                    var newTopic = result.data;
-
-                    //TODO merge with existing list of topics
-
-                    //return to home page (will cause server to reload all message data)
                     $window.location = "#/";
                 },
                 function () {
@@ -99,6 +129,6 @@ function newTopicController($scope, $http, $window) {
                 .then(function () {
                     // after either error or success
                     $scope.isBusy = false;
-            });
+                });
     }
 }
