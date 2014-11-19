@@ -45,4 +45,9 @@ function topicsController($scope, $http) {
 
 
 function newTopicController($scope, $http, $window) {
+    $scope.newTopic = {};
+
+    $scope.save = function () {
+        console.log("save() called for " + $scope.newTopic);
+    }
 }
