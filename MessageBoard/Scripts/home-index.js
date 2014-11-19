@@ -1,6 +1,21 @@
 ﻿// home-index.js
-function homeIndexController($scope, $http) {
-    //console.log("inside the home index controller");
+
+var module = angular.module("homeIndex", ['ngRoute']);
+
+//configure client-side routing with angular
+module.config(
+    function ($routeProvider) {
+        $routeProvider.when("/", {
+            controller: topicsController, // when controller looks like this
+            templateUrl: "/templates/topicsView.html" // use this url fragment to load html template from server
+        });
+
+        $routeProvider.otherwise({ redirectTo: "/" }); //default route
+    });
+
+
+function topicsController($scope, $http) {
+    console.log("inside the topics controller");
 
     $scope.data = [];
     $scope.isBusy = true;
@@ -21,4 +36,3 @@ function homeIndexController($scope, $http) {
         });
 }
 
-angular.module("messageBoard", []).controller("homeIndexController", homeIndexController);

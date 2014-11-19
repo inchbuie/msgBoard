@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" data-ng-app="messageBoard">
+<html lang="en" data-ng-app="@ViewBag.InitModule">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -11,9 +11,8 @@
 
     <!-- HTML5 Support for IE -->
     <!--[if lt IE 9]>
-  <script src="~/Scripts/html5shim.js"></script>
-  <![endif]-->
-
+    <script src="~/Scripts/html5shim.js"></script>
+    <![endif]-->
     <!-- Google Web Font -->
     <link href='http://fonts.googleapis.com/css?family=Dosis:200,400,600' rel='stylesheet' type='text/css'>
 
@@ -21,8 +20,8 @@
     <link href="~/Content/Template/style/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="~/Content/Template/style/font-awesome.css">
     <!--[if IE 7]>
-  <link rel="stylesheet" href="~/Content/Template/style/font-awesome-ie7.css">
-  <![endif]-->
+    <link rel="stylesheet" href="~/Content/Template/style/font-awesome-ie7.css">
+    <![endif]-->
 
     <link href="~/Content/Template/style/ddlevelsmenu-base.css" rel="stylesheet">
     <link href="~/Content/Template/style/ddlevelsmenu-topbar.css" rel="stylesheet">
@@ -37,8 +36,8 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="~/Content/Template/img/favicon/favicon.png">    
-        <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <link rel="shortcut icon" href="~/Content/Template/img/favicon/favicon.png">
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
 </head>
 
 <body>
@@ -59,15 +58,20 @@
                         <div class="social">
                             <!-- Social media icons. Repalce # with your profile links -->
                             <a href="#">
-                                <img src="~/Content/Template/img/facebook.png" alt="" width="40" /></a>
+                                <img src="~/Content/Template/img/facebook.png" alt="" width="40" />
+                            </a>
                             <a href="#">
-                                <img src="~/Content/Template/img/twitter.png" alt="" width="40" /></a>
+                                <img src="~/Content/Template/img/twitter.png" alt="" width="40" />
+                            </a>
                             <a href="#">
-                                <img src="~/Content/Template/img/linkedin.png" alt="" width="40" /></a>
+                                <img src="~/Content/Template/img/linkedin.png" alt="" width="40" />
+                            </a>
                             <a href="#">
-                                <img src="~/Content/Template/img/googleplus.png" alt="" width="40" /></a>
+                                <img src="~/Content/Template/img/googleplus.png" alt="" width="40" />
+                            </a>
                             <a href="#">
-                                <img src="~/Content/Template/img/rss.png" alt="" width="40" /></a>
+                                <img src="~/Content/Template/img/rss.png" alt="" width="40" />
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -98,39 +102,39 @@
                                         <li>@Html.ActionLink("About", "About", "Home")</li>
                                         <li>@Html.ActionLink("My Messages", "MyMessages", "Home")</li>
                                         @*<!-- Add rel="ddsubmenu{count}" to main menu -->
-                                        <li><a href="index.html" rel="ddsubmenu1">Home</a>
-                                            <!-- Sub navigation, A -->
-                                            <!-- Add id "ddsubmenu{count} and class "ddsubmenustyle" -->
-                                            <ul id="ddsubmenu1" class="ddsubmenustyle">
-                                                <li><a href="index-slider.html">With Slider</a></li>
-                                                <li><a href="full-width.html">Full Width</a></li>
-                                            </ul>
-                                        </li>
-                                        <!-- Main navigation -->
-                                        <li><a href="blog.html" rel="ddsubmenu2">Blog</a>
-                                            <!-- Sub Navigation -->
-                                            <ul id="ddsubmenu2" class="ddsubmenustyle">
-                                                <li><a href="blog-single.html">Blog Single</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="portfolio.html" rel="ddsubmenu2">Portfolio</a>
-                                            <!-- Sub navigation -->
-                                            <ul id="ddsubmenu2" class="ddsubmenustyle">
-                                                <li><a href="portfolio-big.html">Portfolio #2</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                        <li><a href="#" rel="ddsubmenu3">Nav Level #1</a>
-                                            <!-- Sub navigation -->
-                                            <ul id="ddsubmenu3" class="ddsubmenustyle">
-                                                <li><a href="#">Nav Level #2</a>
-                                                    <ul>
-                                                        <li><a href="#">Nav Level #3</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>*@
+                                            <li><a href="index.html" rel="ddsubmenu1">Home</a>
+                                                <!-- Sub navigation, A -->
+                                                <!-- Add id "ddsubmenu{count} and class "ddsubmenustyle" -->
+                                                <ul id="ddsubmenu1" class="ddsubmenustyle">
+                                                    <li><a href="index-slider.html">With Slider</a></li>
+                                                    <li><a href="full-width.html">Full Width</a></li>
+                                                </ul>
+                                            </li>
+                                            <!-- Main navigation -->
+                                            <li><a href="blog.html" rel="ddsubmenu2">Blog</a>
+                                                <!-- Sub Navigation -->
+                                                <ul id="ddsubmenu2" class="ddsubmenustyle">
+                                                    <li><a href="blog-single.html">Blog Single</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="portfolio.html" rel="ddsubmenu2">Portfolio</a>
+                                                <!-- Sub navigation -->
+                                                <ul id="ddsubmenu2" class="ddsubmenustyle">
+                                                    <li><a href="portfolio-big.html">Portfolio #2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="about-us.html">About Us</a></li>
+                                            <li><a href="contact.html">Contact Us</a></li>
+                                            <li><a href="#" rel="ddsubmenu3">Nav Level #1</a>
+                                                <!-- Sub navigation -->
+                                                <ul id="ddsubmenu3" class="ddsubmenustyle">
+                                                    <li><a href="#">Nav Level #2</a>
+                                                        <ul>
+                                                            <li><a href="#">Nav Level #3</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>*@
                                     </ul>
                                 </div>
                             </div>
@@ -140,8 +144,12 @@
                     <div class="share">
                         <div class="pull-right">
                             <!-- Share it link for slider -->
-                            <p><a href="#" class="open"><span class="hidden-phone">Share it</span> <i class="icon-share">
-                            </i></a></p>
+                            <p>
+                                <a href="#" class="open">
+                                    <span class="hidden-phone">Share it</span> <i class="icon-share">
+                                    </i>
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -161,7 +169,6 @@
     </div>
 
     <!-- Foot -->
-
     <!-- Three column footer -->
 
     <div class="foot">
@@ -176,10 +183,12 @@
                             <!-- Content -->
                             <!-- Below is the blockquote -->
                             <blockquote>
-                                <p>Fusce imperdiet, risus eget viverra faucibus, diam mi vestibulum libero, ut vestibulum
+                                <p>
+                                    Fusce imperdiet, risus eget viverra faucibus, diam mi vestibulum libero, ut vestibulum
                                     tellus magna nec enim. Nunc dapibus varius interdum. Phasellus at lorem ut lectus
                                     fermentum convallis. Sed diam nisi, pulvinar vitae molestie hendrerit, venenatis
-                                    eget mauris. Integer porta erat ac eros porta ultrices. </p>
+                                    eget mauris. Integer porta erat ac eros porta ultrices.
+                                </p>
                                 <!-- Author information -->
                                 <small>Ashok</small>
                             </blockquote>
@@ -224,8 +233,10 @@
             <div class="row">
                 <div class="span12">
                     <!-- Copyright information -->
-                    <div class="fpadd">Copyright &copy; 2014 - <a href="#">Your Site</a> / <a href="#">Disclaimer</a>
-                        / <a href="#">Privacy Policy</a></div>
+                    <div class="fpadd">
+                        Copyright &copy; 2014 - <a href="#">Your Site</a> / <a href="#">Disclaimer</a>
+                        / <a href="#">Privacy Policy</a>
+                    </div>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -233,7 +244,8 @@
     </footer>
 
     <!-- JS -->
-    <script type="text/javascript" src="~/Scripts/angular.min.js"</script>
+    <script type="text/javascript" src="~/Scripts/angular.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-route.js"></script>
     <script src="~/Scripts/easing.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script type="text/javascript" src="~/Scripts/ddlevelsmenu.js"></script>

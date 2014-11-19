@@ -33,6 +33,19 @@ namespace MessageBoard.Controllers
             return topics;
         }
 
+        public HttpResponseMessage Get(int id, bool includeReplies = false)
+        {
+            var initialResults = (includeReplies)
+                ? _repo.GetTopicsIncludingReplies()
+                : _repo.GetTopics();
+
+            var topic = initialResults.Where(t => t.Id == id).FirstOrDefault();
+
+            return (topic== null) 
+                ? Request.CreateResponse(HttpStatusCode.NotFound) 
+                : Request.CreateResponse(HttpStatusCode.OK, topic);
+        }
+
         // Content-Type of client request must be application/json!
         // using [FromBody] attribute to specify object is from body, not a query parameter
         public HttpResponseMessage Post([FromBody]Topic newTopic)
