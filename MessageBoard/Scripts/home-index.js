@@ -29,17 +29,17 @@ function topicsController($scope, $http) {
 
     $http.get("/api/v1/topics?includeReplies=true")
         .then(
-        function (result) {
-            //succesful
-            angular.copy(result.data, $scope.data);
-        },
-        function () {
-            //error
-            console.log("error loading topics");
-        })
-        .then(function () {
-            // after either error or success
-            $scope.isBusy = false;
+            function (result) {
+                //succesful
+                angular.copy(result.data, $scope.data);
+            },
+            function () {
+                //error
+                console.log("error loading topics");
+            })
+            .then(function () {
+                // after either error or success
+                $scope.isBusy = false;
         });
 }
 
@@ -48,6 +48,26 @@ function newTopicController($scope, $http, $window) {
     $scope.newTopic = {};
 
     $scope.save = function () {
-        console.log("save() called for " + $scope.newTopic);
+        //console.log("save() called for " + $scope.newTopic.title);
+
+        $http.post("/api/v1/topics", $scope.newTopic)
+            .then(
+                function (result) {
+                    //succesful
+                    var newTopic = result.data;
+
+                    //TODO merge with existing list of topics
+
+                    //return to home page (will ask server to reload all message data)
+                    $window.location = "#/";
+                },
+                function () {
+                    //error
+                    console.log("error saving new topic");
+                })
+                .then(function () {
+                    // after either error or success
+                    $scope.isBusy = false;
+            });
     }
 }
