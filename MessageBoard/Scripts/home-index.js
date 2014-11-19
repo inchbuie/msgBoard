@@ -10,7 +10,14 @@ module.config(
             templateUrl: "/templates/topicsView.html" // use this url fragment to load html template from server
         });
 
-        $routeProvider.otherwise({ redirectTo: "/" }); //default route
+        $routeProvider.when("/", {
+            controller: newTopicController, 
+            templateUrl: "templates/newTopicView.html" 
+        });
+
+        $routeProvider.otherwise({
+            redirectTo: "/"
+        }); //default route
     });
 
 
@@ -36,3 +43,6 @@ function topicsController($scope, $http) {
         });
 }
 
+
+function newTopicController($scope, $http, $window) {
+}
