@@ -3,7 +3,7 @@
         <h1>Message Board</h1>
         <p class="lead">Latest Messages...</p>
         <!-- getting data from angular! -->
-        <div>Message Count: {{ data.length }}</div>
+        <div>Message Count: {{ dataSvc.topics.length }}</div>
     </div>
 
     <div>
@@ -17,7 +17,7 @@
 
     <div class="messages">
         <!--  dynamically build with angular with server data*-->
-        <div class="message row" data-ng-repeat="msg in data">
+        <div class="message row" data-ng-repeat="msg in dataSvc.topics">
             <div class="title span10">{{ msg.title }}</div>
             <div class="date span2">{{ msg.created | date:"medium" }}</div>
             <div class="contents span12">{{ msg.body }}</div>

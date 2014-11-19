@@ -20,18 +20,49 @@ module.config(
         }); //default route
     });
 
+// create an AngularJS service for inter-controller communication
+module.factory("dataService",
+    function ($http, $q) { //callback for service
+        //local members
+        var _topics = [];
+        var _getTopics = function () {
 
-function topicsController($scope, $http) {
+            //create deferral object to expose promise (using Angular's magic $q, which was injected)
+            var deferred = $q.defer();
+
+            $http.get("/api/v1/topics?includeReplies=true")
+               .then(
+                   function (result) {
+                       //succesful
+                       angular.copy(result.data, _topics);
+                       deferred.resolve();
+                   },
+                   function () {
+                       //error
+                       deferred.reject();
+                   });
+
+            //return object to allow caller to chain then() call after calling this
+            return deferred.promise;
+        };
+
+        // must return object representing the service, exposing private members
+        return {
+            topics: _topics,
+            getTopics: _getTopics
+        };
+    });
+
+function topicsController($scope, $http, dataService) {
     console.log("inside the topics controller");
 
-    $scope.data = [];
+    $scope.dataSvc = dataService;
     $scope.isBusy = true;
 
-    $http.get("/api/v1/topics?includeReplies=true")
+    dataService.getTopics()
         .then(
             function (result) {
                 //succesful
-                angular.copy(result.data, $scope.data);
             },
             function () {
                 //error
@@ -58,7 +89,7 @@ function newTopicController($scope, $http, $window) {
 
                     //TODO merge with existing list of topics
 
-                    //return to home page (will ask server to reload all message data)
+                    //return to home page (will cause server to reload all message data)
                     $window.location = "#/";
                 },
                 function () {
