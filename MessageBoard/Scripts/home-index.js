@@ -10,7 +10,7 @@ module.config(
             templateUrl: "/templates/topicsView.html" // use this url fragment to load html template from server
         });
 
-        $routeProvider.when("/", {
+        $routeProvider.when("/newmessage", {
             controller: newTopicController, 
             templateUrl: "templates/newTopicView.html" 
         });
