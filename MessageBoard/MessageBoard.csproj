@@ -397,6 +397,9 @@
     <Content Include="Scripts\flexslider.js" />
     <Content Include="Scripts\gmap.js" />
     <Content Include="Scripts\home-index.js" />
+    <Content Include="Scripts\home-index.min.js">
+      <DependentUpon>home-index.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\html5shim.js" />
     <Content Include="Scripts\custom.min.js.map">
       <DependentUpon>custom.js</DependentUpon>
@@ -412,6 +415,9 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\home-index.min.js.map">
+      <DependentUpon>home-index.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />

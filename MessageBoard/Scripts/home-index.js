@@ -3,7 +3,8 @@
 var module = angular.module("homeIndex", ['ngRoute']);
 
 //configure client-side routing with angular
-module.config(
+module.config([
+    "$routeProvider",
     function ($routeProvider) {
         $routeProvider.when("/", {
             controller: topicsController, // when controller looks like this
@@ -11,8 +12,8 @@ module.config(
         });
 
         $routeProvider.when("/newmessage", {
-            controller: newTopicController, 
-            templateUrl: "templates/newTopicView.html" 
+            controller: newTopicController,
+            templateUrl: "templates/newTopicView.html"
         });
 
         $routeProvider.when("/message/:id", {
@@ -23,10 +24,13 @@ module.config(
         $routeProvider.otherwise({
             redirectTo: "/"
         }); //default route
-    });
+    }
+]);
 
 // create an AngularJS service for inter-controller communication
-module.factory("dataService",
+module.factory("dataService", [
+    "$http",
+    "$q",
     function ($http, $q) { //callback for service
         //local members
         var _topics = [];
@@ -59,7 +63,7 @@ module.factory("dataService",
             return deferred.promise;
         };
 
-        
+
         var _addTopic = function (newTopic) {
             var deferred = $q.defer();
 
@@ -80,7 +84,7 @@ module.factory("dataService",
             return deferred.promise;
         };
 
-        function _findTopic(id){
+        function _findTopic(id) {
             //assumes _dataLoaded==true
             var found = null;
 
@@ -132,74 +136,94 @@ module.factory("dataService",
             dataLoaded: _dataLoaded,
             getTopicById: _getTopicById
         };
-    });
+    }
+]);
 
-function topicsController($scope, $http, dataService) {
-    //console.log("inside the topics controller");
+//pass argument names as strings in an array,
+// otherwise minification would rename the function args
+// as in (n,p,i) which would not match the code in the view
+var topicsController = [
+    "$scope",
+    "$http",
+    "dataService",
+    function ($scope, $http, dataService) {
+        //console.log("inside the topics controller");
 
-    $scope.dataSvc = dataService;
-    $scope.isBusy = false;
+        $scope.dataSvc = dataService;
+        $scope.isBusy = false;
 
-    //only call data service if this is the 1st time & data not already loaded
-    if (dataService.dataLoaded() == false) {
-        $scope.isBusy = true;
-        dataService.getTopics()
-            .then(
+        //only call data service if this is the 1st time & data not already loaded
+        if (dataService.dataLoaded() == false) {
+            $scope.isBusy = true;
+            dataService.getTopics()
+                .then(
+                    function (result) {
+                        //succesful
+                    },
+                    function () {
+                        //error
+                        console.log("error loading topics");
+                    })
+                    .then(function () {
+                        // after either error or success
+                        $scope.isBusy = false;
+                    });
+        }
+    }
+];
+
+
+var newTopicController = [
+    "$scope",
+    "$http",
+    "$window",
+    function ($scope, $http, $window) {
+        $scope.newTopic = {};
+
+        $scope.save = function () {
+            //console.log("save() called for " + $scope.newTopic.title);
+
+            dataService.addTopics($scope.newTopic)
+             .then(
+                    function (result) {
+                        //succesful
+                        $window.location = "#/";
+                    },
+                    function () {
+                        //error
+                        console.log("error saving new topic");
+                    })
+                    .then(function () {
+                        // after either error or success
+                        $scope.isBusy = false;
+                    });
+        }
+    }
+];
+
+var singleTopicController = [
+    "$scope",
+    "dataService",
+    "$window",
+    "$routeParams",
+    function ($scope, dataService, $window, $routeParams) {
+        $scope.topic = null;
+        $scope.newReply = {};
+
+        dataService.getTopicById($routeParams.id)
+             .then(
                 function (result) {
                     //succesful
+                    $scope.topic = result;
                 },
                 function () {
-                    //error
-                    console.log("error loading topics");
-                })
-                .then(function () {
-                    // after either error or success
-                    $scope.isBusy = false;
-                });
-    }
-}
-
-
-function newTopicController($scope, $http, $window) {
-    $scope.newTopic = {};
-
-    $scope.save = function () {
-        //console.log("save() called for " + $scope.newTopic.title);
-
-        dataService.addTopics($scope.newTopic)
-         .then(
-                function (result) {
-                    //succesful
+                    //error, return to main page
                     $window.location = "#/";
-                },
-                function () {
-                    //error
-                    console.log("error saving new topic");
-                })
-                .then(function () {
-                    // after either error or success
-                    $scope.isBusy = false;
+
                 });
+
+        $scope.addReply = function () {
+
+        };
     }
-}
-
-function singleTopicController($scope, dataService, $window, $routeParams) {
-    $scope.topic = null;
-    $scope.newReply = {};
-
-    dataService.getTopicById($routeParams.id)
-         .then(
-            function (result) {
-                //succesful
-                $scope.topic = result;
-            },
-            function () {
-                //error, return to main page
-                $window.location = "#/";
-
-            });
-
-    $scope.addReply = function () {
-
-    };
-}
+];
