@@ -15,6 +15,11 @@ module.config(
             templateUrl: "templates/newTopicView.html" 
         });
 
+        $routeProvider.when("/message/:id", {
+            controller: singleTopicController,
+            templateUrl: "templates/singleTopicView.html"
+        });
+
         $routeProvider.otherwise({
             redirectTo: "/"
         }); //default route
@@ -75,17 +80,62 @@ module.factory("dataService",
             return deferred.promise;
         };
 
+        function _findTopic(id){
+            //assumes _dataLoaded==true
+            var found = null;
+
+            $.each(_topics, function (i, item) {
+                if (item.id == id) {
+                    found = item;
+                    return false;
+                }
+            });
+
+            return found;
+        }
+
+        var _getTopicById = function (id) {
+            var deferred = $q.defer();
+
+            if (_dataLoaded()) {
+                var topic = _findTopic(id);
+                if (topic) {
+                    deferred.resolve(topic);
+                } else {
+                    deferred.reject();
+                }
+            } else {
+                _getTopics()
+                    .then(function () {
+                        //succesful
+                        var topic = _findTopic(id);
+                        if (topic) {
+                            deferred.resolve(topic);
+                        } else {
+                            deferred.reject();
+                        }
+                    },
+                    function () {
+                        //error
+                        deferred.reject();
+                    });
+            }
+
+            return deferred.promise;
+        }
+
         // must return object representing the service, exposing private members
         return {
             topics: _topics,
             getTopics: _getTopics,
             addTopic: _addTopic,
-            dataLoaded: _dataLoaded
+            dataLoaded: _dataLoaded,
+            getTopicById: _getTopicById
         };
     });
 
 function topicsController($scope, $http, dataService) {
-    console.log("inside the topics controller");
+    //console.log("inside the topics controller");
 
     $scope.dataSvc = dataService;
     $scope.isBusy = false;
@@ -131,4 +181,25 @@ function newTopicController($scope, $http, $window) {
                     $scope.isBusy = false;
                 });
     }
+}
+
+function singleTopicController($scope, dataService, $window, $routeParams) {
+    $scope.topic = null;
+    $scope.newReply = {};
+
+    dataService.getTopicById($routeParams.id)
+         .then(
+            function (result) {
+                //succesful
+                $scope.topic = result;
+            },
+            function () {
+                //error, return to main page
+                $window.location = "#/";
+
+            });
+
+    $scope.addReply = function () {
+
+    };
 }

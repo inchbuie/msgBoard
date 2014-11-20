@@ -17,19 +17,12 @@
 
     <div class="messages">
         <!--  dynamically build with angular with server data*-->
-        <div class="message row" data-ng-repeat="msg in dataSvc.topics">
-            <div class="title span10">{{ msg.title }}</div>
-            <div class="date span2">{{ msg.created | date:"medium" }}</div>
-            <div class="contents span12">{{ msg.body }}</div>
-            <div class="toolbar span12">
-                <button class="btn btn-primary reply-button">Reply</button>
+        <div class="message row" data-ng-repeat="topic in dataSvc.topics">
+            <div class="title col-md-10">
+                <a data-ng-href="#/message/{{topic.id}}">{{ topic.title }}</a>
             </div>
-            <div class="replies span12">
-                <div class="reply" data-ng-repeat="reply in msg.replies">
-                    <div class="created pull-right">{{ reply.created | date:"medium" }}</div>
-                    <div class="content">{{ reply.body }}</div>
-                </div>
-            </div>
+            <div class="date col-md-2">{{ topic.created | date:"medium" }}</div>
+            <div class="contents col-md-12">{{ topic.body }}</div>
         </div>
     </div>
 </div>
