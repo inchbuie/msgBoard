@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoard", "MessageBoard\MessageBoard.csproj", "{6C03A5E5-77EC-4932-82B1-F53707055770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoard.Tests", "MessageBoard.Tests\MessageBoard.Tests.csproj", "{5F2FD4D8-D9EF-4796-8274-94DDD5A069C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,10 @@ Global
 		{6C03A5E5-77EC-4932-82B1-F53707055770}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C03A5E5-77EC-4932-82B1-F53707055770}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C03A5E5-77EC-4932-82B1-F53707055770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2FD4D8-D9EF-4796-8274-94DDD5A069C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2FD4D8-D9EF-4796-8274-94DDD5A069C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2FD4D8-D9EF-4796-8274-94DDD5A069C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2FD4D8-D9EF-4796-8274-94DDD5A069C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
