@@ -61,7 +61,6 @@ namespace MessageBoard.Tests.Controllers
 
       var json = result.Content.ReadAsStringAsync().Result;
       var topic = JsonConvert.DeserializeObject<Topic>(json);
-
       Assert.IsNotNull(topic);
       Assert.IsTrue(topic.Id > 0);
       Assert.IsTrue(topic.Created > DateTime.MinValue);
