@@ -1,6 +1,5 @@
 ﻿/// <reference path="../scripts/jasmine-html.js" />
 /// <reference path="../../messageboard/scripts/myapp.js" />
-//app.tests.js
 
 describe("myapp tests->", function () {
 
@@ -9,6 +8,7 @@ describe("myapp tests->", function () {
     });
 
     it("log", function () {
-
+        expect(app.log).toBeDefined();
+        app.log("just testing");
     });
 });

@@ -3,10 +3,10 @@
 (function (app) {
     app.isDebug = true;
 
-    app.log(msg) = function () {
+    app.log = function (msg) {
         //only log to console if running as debug
         if (app.isDebug) {
             console.log(msg);
         }
     };
-})(window.app = window.app | {});
+})(window.app = window.app || {});
