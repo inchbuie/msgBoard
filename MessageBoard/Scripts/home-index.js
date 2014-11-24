@@ -1,9 +1,9 @@
 ﻿//home-index.js
 
-var module = angular.module( "homeIndex", [ "ngRoute" ] );
+var homeIndexModule = angular.module( "homeIndex", [ "ngRoute" ] );
 
 //configure client-side routing with angular
-module.config([
+homeIndexModule.config([
     "$routeProvider",
     function( $routeProvider ){
         $routeProvider.when( "/", {
@@ -28,7 +28,7 @@ module.config([
 ] );
 
 // create an AngularJS service for inter-controller communication
-module.factory("dataService", [
+homeIndexModule.factory("dataService", [
     "$http",
     "$q",
     function($http, $q) { //callback for service
